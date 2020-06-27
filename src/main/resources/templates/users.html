@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Таблица пользователей</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="/" method="post">
+    <input type="text" name="firstName" placeholder="Введите имя" pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё]+$">
+    <input type="text" name="lastName" placeholder="Введите фамилию" pattern="^[A-ZА-ЯЁ]{1}[a-zа-яё]+$">
+    <input type="tel"  name="phoneNumber"  placeholder="7-xxx-xxx-xx-xx" pattern="[0-9]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}">
+    <input type="email" name="email" placeholder="Введите емэйл" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+    <button type="submit">Добавить пользователя</button>
+</form>
+<h3>Таблица Пользователей</h3>
+<table>
+    <thead>
+    <tr>
+        <th> ID </th>
+        <th> Name </th>
+        <th> LastName </th>
+        <th> PhoneNumber </th>
+        <th> Email </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${users.empty}">
+        <td colspan="2"> В таблице нет данных </td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td><span th:text="${user.id}"> ID </span></td>
+        <td><span th:text="${user.firstName}"> Name </span></td>
+        <td><span th:text="${user.lastName}"> LastName </span></td>
+        <td><span th:text="${user.phoneNumber}"> PhoneNumber </span></td>
+        <td><span th:text="${user.email}"> Email </span></td>
+        <td><a th:href="@{${user.id}}">Удалить</a></td>
+        <td><a th:href="'/' + ${user.id} + '/update'">Редактировать</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
